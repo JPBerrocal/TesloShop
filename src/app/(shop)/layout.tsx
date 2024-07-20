@@ -1,3 +1,4 @@
+import { SideMenu } from "@/components";
 import { TopMenu } from "@/components/ui/top-menu/TopMenu";
 
 export default function ShopLayout({
@@ -8,6 +9,7 @@ export default function ShopLayout({
   return (
     <main className="min-h-screen">
       <TopMenu />
+      <SideMenu />
       <div className="px-0 sm:px-7">{children}</div>
     </main>
   );
