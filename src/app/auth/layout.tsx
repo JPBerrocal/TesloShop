@@ -3,5 +3,5 @@ export default function ShopLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className="bg-emerald-400 min-h-screen">{children}</main>;
+  return <main className="bg-sky-400 min-h-screen">{children}</main>;
 }
