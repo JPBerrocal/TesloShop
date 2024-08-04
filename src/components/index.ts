@@ -1,9 +1,10 @@
-import { SizeSelector } from "./product/size-selector/SizeSelector";
 export { PageNotFound } from "./ui/not-found/PageNotFound";
-export { Title } from "./ui/title/Title";
-export { TopMenu } from "./ui/top-menu/TopMenu";
 export { ProductGrid } from "./products/product-grid/ProductGrid";
 export { ProductGridItem } from "./products/product-grid/ProductGridItem";
+export { ProductSlideShow } from "./product/slide-show/ProductSlideShow";
+export { QuantitySelector } from "./product/quantity-selector/QuantitySelector";
 export { SideMenu } from "./ui/sidemenu/SideMenu";
 export { SizeSelector } from "./product/size-selector/SizeSelector";
-export { QuantitySelector } from "./product/quantity-selector/QuantitySelector";
+export { Title } from "./ui/title/Title";
+export { TopMenu } from "./ui/top-menu/TopMenu";
+import { SizeSelector } from "./product/size-selector/SizeSelector";
