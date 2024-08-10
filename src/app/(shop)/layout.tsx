@@ -1,4 +1,5 @@
-import { SideMenu } from "@/components";
+import { Footer, SideMenu } from "@/components";
+
 import { TopMenu } from "@/components/ui/top-menu/TopMenu";
 
 export default function ShopLayout({
@@ -11,6 +12,7 @@ export default function ShopLayout({
       <TopMenu />
       <SideMenu />
       <div className="px-0 sm:px-7">{children}</div>
+      <Footer />
     </main>
   );
 }

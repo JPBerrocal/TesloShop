@@ -1,12 +1,11 @@
+export { MobileProductSlideShow } from "./product/slide-show/MobileProductSlideShow";
 export { PageNotFound } from "./ui/not-found/PageNotFound";
 export { ProductGrid } from "./products/product-grid/ProductGrid";
 export { ProductGridItem } from "./products/product-grid/ProductGridItem";
 export { ProductSlideShow } from "./product/slide-show/ProductSlideShow";
-export { MobileProductSlideShow } from "./product/slide-show/MobileProductSlideShow";
 export { QuantitySelector } from "./product/quantity-selector/QuantitySelector";
 export { SideMenu } from "./ui/sidemenu/SideMenu";
 export { SizeSelector } from "./product/size-selector/SizeSelector";
 export { Title } from "./ui/title/Title";
 export { TopMenu } from "./ui/top-menu/TopMenu";
-import { SizeSelector } from "./product/size-selector/SizeSelector";
-import { MobileProductSlideShow } from "./product/slide-show/MobileProductSlideShow";
+export { Footer } from "./ui/footer/Footer";
