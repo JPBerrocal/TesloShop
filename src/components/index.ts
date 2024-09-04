@@ -1,3 +1,4 @@
+import { StockLabel } from "./product/stock-label/StockLabel";
 export { MobileProductSlideShow } from "./product/slide-show/MobileProductSlideShow";
 export { PageNotFound } from "./ui/not-found/PageNotFound";
 export { ProductGrid } from "./products/product-grid/ProductGrid";
@@ -10,3 +11,4 @@ export { Title } from "./ui/title/Title";
 export { TopMenu } from "./ui/top-menu/TopMenu";
 export { Footer } from "./ui/footer/Footer";
 export { Pagination } from "./ui/pagination/Pagination";
+export { StockLabel } from "./product/stock-label/StockLabel";
