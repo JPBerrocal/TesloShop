@@ -3,7 +3,10 @@ import "./globals.css";
 import { inter } from "@/config/fonts";
 
 export const metadata: Metadata = {
-  title: "TesloShop - Home",
+  title: {
+    template: "%s - Teslo | Shop",
+    default: "Teslo | Shop",
+  },
   description: "Nextjs ecommerce app",
 };
 
