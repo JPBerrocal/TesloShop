@@ -4,10 +4,16 @@ import { persist } from "zustand/middleware";
 
 interface State {
   cart: CartProduct[];
-  addProductToCart: (product: CartProduct) => void;
   getTotalItems: () => number;
-  //updateQuantity
-  //removeProductFromCart
+  getSummaryInformation: () => {
+    totalItems: number;
+    subTotal: number;
+    taxes: number;
+    total: number;
+  };
+  addProductToCart: (product: CartProduct) => void;
+  updateProductQuantity: (product: CartProduct, quantity: number) => void;
+  removeProductFromCart: (product: CartProduct) => void;
 }
 
 export const useCartStore = create<State>()(
@@ -15,6 +21,25 @@ export const useCartStore = create<State>()(
     (set, get) => ({
       cart: [],
       //methods
+      getSummaryInformation: () => {
+        const { cart } = get();
+
+        const subTotal = cart.reduce(
+          (subTotal, product) => subTotal + product.quantity * product.price,
+          0
+        );
+
+        const taxes = subTotal * 0.15;
+
+        const total = subTotal + taxes;
+
+        const totalItems = cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+
+        return { totalItems, subTotal, taxes, total };
+      },
       getTotalItems: () => {
         const { cart } = get();
 
@@ -43,6 +68,31 @@ export const useCartStore = create<State>()(
         } else {
           set({ cart: [...cart, product] });
         }
+      },
+
+      updateProductQuantity: (product: CartProduct, quantity: number) => {
+        const { cart } = get();
+        set({
+          cart: cart.map((item) => {
+            if (item.id === product.id && item.size === product.size) {
+              return {
+                ...item,
+                quantity,
+              };
+            }
+            return item;
+          }),
+        });
+      },
+
+      removeProductFromCart: (product: CartProduct) => {
+        const { cart } = get();
+
+        const updatedCart = cart.filter(
+          (item) => item.id !== product.id || item.size !== product.size
+        );
+
+        set({ cart: updatedCart });
       },
     }),
     {

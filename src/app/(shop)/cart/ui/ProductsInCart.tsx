@@ -9,6 +9,12 @@ import { Size } from "../../../../interfaces/product.interface";
 
 export const ProductsInCart = () => {
   const productsInCart = useCartStore((state) => state.cart);
+  const removeProductFromCart = useCartStore(
+    (state) => state.removeProductFromCart
+  );
+  const updateProductQuantity = useCartStore(
+    (state) => state.updateProductQuantity
+  );
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -44,9 +50,16 @@ export const ProductsInCart = () => {
             <p>${product.price}</p>
             <QuantitySelector
               quantity={product.quantity}
-              onQuantityChange={(value) => console.log(value)}
+              onQuantityChange={(quantity) =>
+                updateProductQuantity(product, quantity)
+              }
             />
-            <button className="underline mt-3">Remover</button>
+            <button
+              className="underline mt-3"
+              onClick={() => removeProductFromCart(product)}
+            >
+              Remover
+            </button>
           </div>
         </div>
       ))}
