@@ -1,5 +1,6 @@
 "use client";
 
+import { logout } from "@/actions";
 import { useUIStore } from "@/store";
 import clsx from "clsx";
 import Link from "next/link";
@@ -18,6 +19,12 @@ import {
 export const SideMenu = () => {
   const isSideMenuOpen = useUIStore((state) => state.isSideMenuOpen);
   const closeMenu = useUIStore((state) => state.closeSideMenu);
+
+  const handleLogout = async () => {
+    await logout();
+    closeMenu();
+  };
+
   return (
     <div>
       {/* background */}
@@ -59,8 +66,9 @@ export const SideMenu = () => {
 
         {/* Menu */}
         <Link
-          href="/"
+          href="/profile"
           className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+          onClick={() => closeMenu()}
         >
           <IoPersonOutline size={30} />
           <span className="ml-3 text-xl">Perfil</span>
@@ -73,15 +81,17 @@ export const SideMenu = () => {
           <span className="ml-3 text-xl">Ordenes</span>
         </Link>
         <Link
-          href="/"
+          href="/auth/login"
           className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
         >
           <IoLogInOutline size={30} />
           <span className="ml-3 text-xl">Ingresar</span>
         </Link>
+
         <Link
           href="/"
           className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+          onClick={handleLogout}
         >
           <IoLogOutOutline size={30} />
           <span className="ml-3 text-xl">Salir</span>
