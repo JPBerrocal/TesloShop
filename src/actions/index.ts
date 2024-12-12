@@ -3,3 +3,4 @@ export * from "./products/get-product-by-slug";
 export * from "./auth/login-action";
 export { logout } from "./auth/logout-action";
 export * from "./auth/register-action";
+export { getCountries } from "./country/get-country";
