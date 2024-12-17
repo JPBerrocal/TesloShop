@@ -1,4 +1,4 @@
-import { setUserAddress } from "./address/set-user-address";
+export { placeOrder } from "./order/place-order";
 export { getPaginatedProductsWithImages } from "./products/product-pagination";
 export * from "./products/get-product-by-slug";
 export * from "./auth/login-action";
