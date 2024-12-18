@@ -14,6 +14,7 @@ interface State {
   addProductToCart: (product: CartProduct) => void;
   updateProductQuantity: (product: CartProduct, quantity: number) => void;
   removeProductFromCart: (product: CartProduct) => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<State>()(
@@ -94,7 +95,11 @@ export const useCartStore = create<State>()(
 
         set({ cart: updatedCart });
       },
+      clearCart: () => {
+        set({ cart: [] });
+      },
     }),
+
     {
       name: "cart-storage",
       //skipHydration: true, esto se puede usar para evitar el problema de hidratacion en el servidor, pero hay que hacer las el I/O de localstorage manual
