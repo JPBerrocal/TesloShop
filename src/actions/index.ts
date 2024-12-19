@@ -10,3 +10,5 @@ export {
   deleteUserAddress,
   getUserAddress,
 } from "./address/set-user-address";
+export { getOrderById } from "./order/get-order-by-id";
+export { getOrdersByUser } from "./order/get-order-by-user";
