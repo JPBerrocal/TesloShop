@@ -15,4 +15,5 @@ npm run dev
 npm run dev:turbo
 ```
 
-3.
+3. PAYPAL
+   https://developer.paypal.com/dashboard

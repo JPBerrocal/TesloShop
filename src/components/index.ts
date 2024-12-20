@@ -12,4 +12,5 @@ export { TopMenu } from "./ui/top-menu/TopMenu";
 export { Footer } from "./ui/footer/Footer";
 export { Pagination } from "./ui/pagination/Pagination";
 export { StockLabel } from "./product/stock-label/StockLabel";
-export { Provider } from "./providers/Provider";
+export { Providers } from "./providers/Providers";
+export { PayPalButton } from "./paypal/PayPalButton";
