@@ -6,6 +6,7 @@ export { logout } from "./auth/logout-action";
 export * from "./auth/register-action";
 export { getOrderById } from "./order/get-order-by-id";
 export { getOrdersByUser } from "./order/get-order-by-user";
+export { getPaginatedOrders } from "./order/get-paginated-orders";
 export { setTransactiondId } from "./paypal/order-set-transactionId";
 export { paypalCheckPayment } from "./paypal/paypal-check-payment";
 export { getCountries } from "./country/get-country";
@@ -14,3 +15,4 @@ export {
   deleteUserAddress,
   getUserAddress,
 } from "./address/set-user-address";
+export { getPaginatedUsers } from "./user/get-paginated-users";
