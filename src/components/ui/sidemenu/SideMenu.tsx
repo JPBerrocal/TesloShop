@@ -1,10 +1,10 @@
 "use client";
 
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { logout } from "@/actions";
 import { useUIStore } from "@/store";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
 import {
   IoCloseOutline,
   IoLogInOutline,

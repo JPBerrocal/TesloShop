@@ -1,6 +1,7 @@
 export { placeOrder } from "./order/place-order";
 export { getPaginatedProductsWithImages } from "./products/product-pagination";
 export * from "./products/get-product-by-slug";
+export { getAllCategories } from "./products/get-all-categories";
 export * from "./auth/login-action";
 export { logout } from "./auth/logout-action";
 export * from "./auth/register-action";

@@ -12,8 +12,6 @@ export const authConfig: NextAuthConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      console.log("auth: ", auth);
-
       const isLoggedIn = !!auth?.user;
       return true;
     },
