@@ -1,5 +1,6 @@
 "use client";
 
+import { changeUserRole } from "@/actions";
 import type { User } from "@/interfaces";
 
 interface Props {
@@ -7,8 +8,8 @@ interface Props {
 }
 
 export const UsersTable = ({ users }: Props) => {
-  const handleUserRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
+  const handleUserRoleChange = async (userId: string, role: string) => {
+    await changeUserRole(userId, role);
   };
 
   return (
@@ -52,7 +53,9 @@ export const UsersTable = ({ users }: Props) => {
                 <select
                   value={user.role}
                   className="text-sm text-gray-900 w-full p-2"
-                  onChange={handleUserRoleChange}
+                  onChange={(e) =>
+                    handleUserRoleChange(user.id, e.target.value)
+                  }
                 >
                   <option value="admin">Admin</option>
                   <option value="user">User</option>

@@ -16,3 +16,4 @@ export {
   getUserAddress,
 } from "./address/set-user-address";
 export { getPaginatedUsers } from "./user/get-paginated-users";
+export { changeUserRole } from "./user/change-user-role";
