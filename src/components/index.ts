@@ -5,6 +5,7 @@ export { ProductGrid } from "./products/product-grid/ProductGrid";
 export { ProductGridItem } from "./products/product-grid/ProductGridItem";
 export { ProductSlideShow } from "./product/slide-show/ProductSlideShow";
 export { QuantitySelector } from "./product/quantity-selector/QuantitySelector";
+export { ProductImage } from "./product/product-image/ProductImage";
 export { SideMenu } from "./ui/sidemenu/SideMenu";
 export { SizeSelector } from "./product/size-selector/SizeSelector";
 export { Title } from "./ui/title/Title";

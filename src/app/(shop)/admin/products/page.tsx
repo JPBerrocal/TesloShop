@@ -1,10 +1,7 @@
 import Link from "next/link";
-import { IoCardOutline } from "react-icons/io5";
-import clsx from "clsx";
 import { getPaginatedProductsWithImages } from "@/actions";
-import { Title } from "@/components";
+import { ProductImage, Title } from "@/components";
 import { Pagination } from "@/components/ui/pagination/Pagination";
-import Image from "next/image";
 import { currencFormat } from "../../../../utils/currencyFormatter";
 
 interface Props {
@@ -83,8 +80,8 @@ export default async function ProductsAdminPage({ searchParams }: Props) {
                       href={`/product/${product.slug}`}
                       className="hover:underline"
                     >
-                      <Image
-                        src={`/products/${product.ProductImage[0].url}`}
+                      <ProductImage
+                        src={product.ProductImage[0]?.url}
                         alt={product.title}
                         width={80}
                         height={80}

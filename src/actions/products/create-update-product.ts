@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { Gender, Product, Size } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const ProductSchema = z.object({
@@ -83,6 +84,14 @@ export const upsertProduct = async (formData: FormData) => {
     });
 
     //Revalidacion de paths
+    revalidatePath("/admin/products");
+    revalidatePath(`/admin/product/${prismaTx.dbProduct.slug}`);
+    revalidatePath(`/products/${prismaTx.dbProduct.slug}`);
+
+    return {
+      ok: true,
+      updatedProduct: prismaTx.dbProduct,
+    };
   } catch (error) {
     console.log(error);
     return {

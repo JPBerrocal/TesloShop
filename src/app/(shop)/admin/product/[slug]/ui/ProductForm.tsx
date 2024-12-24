@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import clsx from "clsx";
 import { Product, ProductImage } from "@/interfaces";
 import { upsertProduct } from "@/actions";
+import { useRouter } from "next/navigation";
 
 interface Props {
   product: Partial<Product> & { ProductImage?: ProductImage[] };
@@ -45,6 +46,8 @@ export const ProductForm = ({ product, categories }: Props) => {
 
   watch(["sizes"]);
 
+  const router = useRouter();
+
   const onSizeChange = (size: string) => {
     const sizes = new Set(getValues("sizes"));
 
@@ -71,7 +74,14 @@ export const ProductForm = ({ product, categories }: Props) => {
     formData.append("gender", productToSave.gender);
     formData.append("categoryId", productToSave.categoryId);
 
-    await upsertProduct(formData);
+    const { ok, updatedProduct } = await upsertProduct(formData);
+
+    if (!ok) {
+      alert("Something went wrong");
+      return;
+    }
+
+    router.replace(`/admin/product/${updatedProduct?.slug}`);
   };
 
   return (
