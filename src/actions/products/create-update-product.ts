@@ -87,7 +87,16 @@ export const upsertProduct = async (formData: FormData) => {
           const images = await uploadImages(
             formData.getAll("images") as File[]
           );
-          console.log(images);
+          if (!images) {
+            throw new Error("Error al subir las imagenes");
+          }
+
+          await tx.productImage.createMany({
+            data: images.map((image) => ({
+              productId: dbProduct.id,
+              url: image,
+            })),
+          });
         }
 
         return {

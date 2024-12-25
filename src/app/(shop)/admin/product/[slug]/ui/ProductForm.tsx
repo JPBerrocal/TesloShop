@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
 import { Product, ProductImage } from "@/interfaces";
-import { upsertProduct } from "@/actions";
+import { deleteProductImage, upsertProduct } from "@/actions";
+import { ProductImage as ProductImageViewer } from "@/components";
 
 interface Props {
   product: Partial<Product> & { ProductImage?: ProductImage[] };
@@ -89,6 +90,13 @@ export const ProductForm = ({ product, categories }: Props) => {
     }
 
     router.replace(`/admin/product/${updatedProduct?.slug}`);
+  };
+
+  const handleDeleteProductImage = async (
+    imageId: string,
+    imageUrl: string
+  ) => {
+    await deleteProductImage(imageId, imageUrl);
   };
 
   return (
@@ -222,9 +230,9 @@ export const ProductForm = ({ product, categories }: Props) => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {product.ProductImage?.map((image) => (
               <div key={image.id}>
-                <Image
+                <ProductImageViewer
                   alt={product.title ?? ""}
-                  src={`/products/${image.url}`}
+                  src={image.url}
                   width={300}
                   height={300}
                   className="rounded-t-xl shadow-md"
@@ -232,7 +240,7 @@ export const ProductForm = ({ product, categories }: Props) => {
                 <button
                   className="btn-eliminate !rounded-b-xl w-full"
                   type="button"
-                  onClick={() => console.log(image.id, image.url)}
+                  onClick={() => handleDeleteProductImage(image.id, image.url)}
                 >
                   Eliminar
                 </button>

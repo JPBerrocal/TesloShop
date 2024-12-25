@@ -1,8 +1,10 @@
+import { deleteProductImage } from "./products/delete-productImage";
 export { placeOrder } from "./order/place-order";
 export { getPaginatedProductsWithImages } from "./products/product-pagination";
 export * from "./products/get-product-by-slug";
 export { getAllCategories } from "./products/get-all-categories";
 export { upsertProduct } from "./products/create-update-product";
+export { deleteProductImage } from "./products/delete-productImage";
 export * from "./auth/login-action";
 export { logout } from "./auth/logout-action";
 export * from "./auth/register-action";
