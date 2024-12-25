@@ -4,6 +4,9 @@ import prisma from "@/lib/prisma";
 import { Gender, Product, Size } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config(process.env.CLOUDINARY_URL || "");
 
 const ProductSchema = z.object({
   id: z.string().uuid().optional(),
@@ -43,45 +46,58 @@ export const upsertProduct = async (formData: FormData) => {
 
     const { id, ...rest } = product;
 
-    const prismaTx = await prisma.$transaction(async (tx) => {
-      let dbProduct: Product;
-      const tagsArray = rest.tags
-        .split(",")
-        .map((tag) => tag.trim().toLowerCase());
+    const prismaTx = await prisma.$transaction(
+      async (tx) => {
+        let dbProduct: Product;
+        const tagsArray = rest.tags
+          .split(",")
+          .map((tag) => tag.trim().toLowerCase());
 
-      if (id) {
-        dbProduct = await tx.product.update({
-          where: {
-            id,
-          },
-          data: {
-            ...rest,
-            sizes: {
-              set: rest.sizes as Size[],
+        if (id) {
+          dbProduct = await tx.product.update({
+            where: {
+              id,
             },
-            tags: {
-              set: tagsArray,
+            data: {
+              ...rest,
+              sizes: {
+                set: rest.sizes as Size[],
+              },
+              tags: {
+                set: tagsArray,
+              },
             },
-          },
-        });
-      } else {
-        dbProduct = await tx.product.create({
-          data: {
-            ...rest,
-            sizes: {
-              set: rest.sizes as Size[],
+          });
+        } else {
+          dbProduct = await tx.product.create({
+            data: {
+              ...rest,
+              sizes: {
+                set: rest.sizes as Size[],
+              },
+              tags: {
+                set: tagsArray,
+              },
             },
-            tags: {
-              set: tagsArray,
-            },
-          },
-        });
+          });
+        }
+
+        //Carga y guardado de imagnes
+        if (formData.getAll("images")) {
+          const images = await uploadImages(
+            formData.getAll("images") as File[]
+          );
+          console.log(images);
+        }
+
+        return {
+          dbProduct,
+        };
+      },
+      {
+        timeout: 10000,
       }
-      console.log("Product: ", dbProduct);
-      return {
-        dbProduct,
-      };
-    });
+    );
 
     //Revalidacion de paths
     revalidatePath("/admin/products");
@@ -98,5 +114,28 @@ export const upsertProduct = async (formData: FormData) => {
       ok: false,
       message: "Error al salvar el producto",
     };
+  }
+};
+
+const uploadImages = async (images: File[]) => {
+  try {
+    const uploadPromises = images.map(async (image) => {
+      const buffer = await image.arrayBuffer();
+      const base64Image = Buffer.from(buffer).toString("base64");
+
+      return cloudinary.uploader
+        .upload(`data:image/png;base64,${base64Image}`, {
+          folder: "teslo-shop",
+        })
+        .then((result) => result.secure_url);
+    });
+
+    const upladedImages = await Promise.all(uploadPromises);
+    return upladedImages;
+
+    //
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 };
