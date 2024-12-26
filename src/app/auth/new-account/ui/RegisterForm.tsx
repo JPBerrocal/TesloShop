@@ -47,7 +47,7 @@ export const RegisterForm = () => {
         {...register("name", { required: true })}
       />
       {errors.name && (
-        <span className="text-red-500">"El nombre es requerido"</span>
+        <span className="text-red-500">El nombre es requerido</span>
       )}
 
       <label htmlFor="email">Correo electrónico</label>
@@ -65,10 +65,10 @@ export const RegisterForm = () => {
         })}
       />
       {errors.email?.type === "required" && (
-        <span className="text-red-500">"El Email es requerido"</span>
+        <span className="text-red-500">El Email es requerido</span>
       )}
       {errors.email?.type === "pattern" && (
-        <span className="text-red-500">"Favor introduzca un email valido"</span>
+        <span className="text-red-500">Favor introduzca un email valido</span>
       )}
 
       <label htmlFor="password">Contraseña</label>
@@ -80,7 +80,7 @@ export const RegisterForm = () => {
         {...register("password", { required: true, minLength: 8 })}
       />
       {errors.password && (
-        <span className="text-red-500">"La Contraseña es requerida"</span>
+        <span className="text-red-500">La Contraseña es requerida</span>
       )}
 
       {errorMessage && <span className="text-red-500">{errorMessage}</span>}
